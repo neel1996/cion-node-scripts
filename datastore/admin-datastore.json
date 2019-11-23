@@ -1,0 +1,7 @@
+[{
+    "adminConsole": {
+        "centralDataStore": "../datastore/cion-cerebro.json",
+        "configDataStore": "./datastore/cion-config-datastore.json",
+        "configSetDataStore": "./datastore/stored-config-set/"
+    }
+}]

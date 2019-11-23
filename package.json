@@ -1,0 +1,22 @@
+{
+  "name": "cion",
+  "version": "1.0.0",
+  "description": "Cion backend node scripts",
+  "main": "file-manipulation-api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startServer": "nodemon server.js",
+    "dev": "concurrently \"npm run startServer\" \"npm run startClient\""
+  },
+  "author": "Neel1996",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.5.8",
+    "multer": "^1.4.2"
+  }
+}
