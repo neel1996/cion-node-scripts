@@ -2,10 +2,9 @@
 Common server module to start all API nodes
 */
 
-const fileManipulationAPI = require('./file-manipulation-api');
-const configDataReaderAPI = require('./read-configdata-api');
-const thumbnailAPI = require('./thumbnail-api');
-const getConfigDataGraph = require('./getconfigapi-graph');
+const fileManipulationAPI = require('./global-api-modules/file-manipulation-api');
+const thumbnailAPI = require('./global-api-modules/thumbnail-api');
+const getConfigDataGraph = require('./global-api-modules/getconfigapi-graph');
 
 fileManipulationAPI.listen(5000, function(err){
     console.log("### File manipulation server module ###");
@@ -18,18 +17,7 @@ fileManipulationAPI.listen(5000, function(err){
     }
 });
 
-configDataReaderAPI.listen(5001, function(err){
-    console.log("### Configured Data Reader server module ###");
-
-    if(err){
-        console.log("Error invoking [Configuration Data Reader] API :: ", err);
-    }
-    else{
-        console.log("Connected to [Configuration Data Reader] API");
-    }
-});
-
-thumbnailAPI.listen(5002, function(err){
+thumbnailAPI.listen(5001, function(err){
     console.log("### Thumbnail API server module ###");
 
     if(err){

@@ -1,5 +1,4 @@
 var { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLSchema } = require('graphql');
-var fs = require('fs');
 var axios = require('axios');
 
 var ConfigDataType = new GraphQLObjectType({
@@ -27,9 +26,9 @@ var RootQuery = new GraphQLObjectType({
                 return new Promise((resolve, reject) => {
                     axios({
                         'method': 'GET',
-                        'url': 'http://localhost:5001/configureditems'
+                        'url': 'http://localhost:9000/configuredDataItems'
                     }).then((res) => {
-                        resolve(JSON.parse(JSON.stringify(res.data.configuredItems)));
+                        resolve(JSON.parse(JSON.stringify(res.data)));
                     }).catch((err) => {
                         console.log(err);
                     });

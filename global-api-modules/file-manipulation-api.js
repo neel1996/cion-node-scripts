@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
 const multer = require('multer');
+const axios = require('axios');
 
 var app = express();
 var upload = multer({
@@ -14,19 +15,17 @@ app.use((req, res, next) => {
         'Content-type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*'
     });
-    
+
     next();
 });
 
 app.use(cors());
 
 app.post('/writefileapi', upload.single('principleThumbnail'), (req, res) => {
+
+    console.log(req.body);
     var option = req.body.option;
     var writePayload = req.body;
-
-    console.log("File : " + req.file);
-
-    // console.log("Data : " + option + " \n " + JSON.stringify(writePayload, null, 2));
 
     var path = getFilePath(option);
     var thumbnailImagePath = './datastore/configuration-thumbnail/' + writePayload.configDataStore.split(".")[0].split("-")[1] + ".jpeg";
@@ -36,43 +35,30 @@ app.post('/writefileapi', upload.single('principleThumbnail'), (req, res) => {
     writePayload.principleThumbnail = thumbnailImagePath;
     writePayload.principleId = writePayload.configDataStore.split(".")[0].split("-")[1];
 
-    var configFileData = fs.readFileSync(path, {encoding: 'utf8'});
-
-    if(configFileData === "" || configFileData === undefined){
-        fs.writeFile(path, "[" + JSON.stringify(writePayload) + "]", (err, writeResult) => {
-            if (err) {
-                console.log("Error Writing to File : " + path);
-                res.json({
-                    'message': 'File Writing Error'
-                });
-            }
-            else {
-                console.log("File Writing Success : " + res);
-                res.json({
-                    'message': 'Config File updated successfully'
-                });
-            }
+    axios.post(
+        path,
+        {
+            "principleName": writePayload.principleName,
+            "principleDescription": writePayload.principleDescription,
+            "principleThumbnail": writePayload.principleThumbnail,
+            "storageOption": writePayload.storageOption,
+            "configDataStore": writePayload.configDataStore,
+            "principleId": writePayload.principleId,
+            "totalItems": 0
+        }
+    ).then((response) => {
+        if (response) {
+            console.log("Write API : " + response);
+            res.json({
+                'message': 'Config File updated successfully'
+            });
+        }
+    }).catch((error) => {
+        console.log(error);
+        res.json({
+            'message': 'File Writing Error'
         });
-    }
-    else {
-        var originalContent = configFileData.toString().split(']')[0];
-        var newContent = originalContent + "," + JSON.stringify(writePayload, null ,2) + ']';
-
-        fs.writeFile(path, newContent, (err, writeResult) => {
-            if (err) {
-                console.log("Error Writing to File : " + path);
-                res.json({
-                    'message': 'File Writing Error'
-                });
-            }
-            else {
-                console.log("File Writing Success : " + res);
-                res.json({
-                    'message': 'Config File updated successfully'
-                });
-            }
-        });
-    }
+    });
 });
 
 

@@ -5,8 +5,8 @@
   "main": "file-manipulation-api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "startServer": "nodemon server.js",
-    "dev": "concurrently \"npm run startServer\" \"npm run startClient\""
+    "start:devServer": "nodemon server.js",
+    "start:jsonServer": "json-server --watch ./datastore/cion-config-datastore.json --port 9000"
   },
   "author": "Neel1996",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.8",
+    "json-server": "^0.15.1",
     "multer": "^1.4.2"
   }
 }

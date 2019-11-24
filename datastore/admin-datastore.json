@@ -1,7 +1,7 @@
 [{
     "adminConsole": {
         "centralDataStore": "../datastore/cion-cerebro.json",
-        "configDataStore": "./datastore/cion-config-datastore.json",
+        "configDataStore": "http://localhost:9000/configuredDataItems",
         "configSetDataStore": "./datastore/stored-config-set/"
     }
 }]

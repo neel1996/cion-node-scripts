@@ -5,6 +5,7 @@
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
+const path = require('path');
 
 var app = express();
 
@@ -18,10 +19,10 @@ app.use((req,res,next)=>{
 });
 
 app.get('/thumbnailapi/:thumbnail', (req,res)=>{
-    var principleThumbnail = req.param('thumbnail');
+    var principleThumbnail = req.path.split("/")[2];
 
     res.sendFile(
-        __dirname + '/datastore/configuration-thumbnail/' + principleThumbnail
+        path.resolve('./datastore/configuration-thumbnail') + "/" + principleThumbnail
     );
 });
 
