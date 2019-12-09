@@ -28,16 +28,32 @@ app.post('/writefileapi', upload.single('principleThumbnail'), (req, res) => {
     var writePayload = req.body;
 
     var path = getFilePath(option);
-    var thumbnailImagePath = './datastore/configuration-thumbnail/' + writePayload.configDataStore.split(".")[0].split("-")[1] + ".jpeg";
+    var thumbnailImagePath = './datastore/configuration-thumbnail/' + writePayload.principleId + ".jpeg";
 
     fs.writeFileSync(thumbnailImagePath, writePayload.principleThumbnail.split(",")[1], 'base64');
 
     writePayload.principleThumbnail = thumbnailImagePath;
-    writePayload.principleId = writePayload.configDataStore.split(".")[0].split("-")[1];
 
-    axios.post(
-        path,
-        {
+    var configDataPayload = {};
+
+    if (writePayload.storageOption === "db") {
+        configDataPayload = {
+            ...configDataPayload,
+            "principleName": writePayload.principleName,
+            "principleDescription": writePayload.principleDescription,
+            "principleThumbnail": writePayload.principleThumbnail,
+            "storageOption": writePayload.storageOption,
+            "dbHostName": writePayload.dbHostName,
+            "dbPortNumber": writePayload.dbPortNumber,
+            "dbUserName": writePayload.dbUserName,
+            "dbPassword": writePayload.dbPassword,
+            "dbName": writePayload.dbName,
+            "principleId": writePayload.principleId,
+            "totalItems": 0
+        }
+    }else{
+        configDataPayload = {
+            ...configDataPayload,
             "principleName": writePayload.principleName,
             "principleDescription": writePayload.principleDescription,
             "principleThumbnail": writePayload.principleThumbnail,
@@ -45,6 +61,13 @@ app.post('/writefileapi', upload.single('principleThumbnail'), (req, res) => {
             "configDataStore": writePayload.configDataStore,
             "principleId": writePayload.principleId,
             "totalItems": 0
+        }
+    }
+
+
+    axios.post(
+        path, {
+            ...configDataPayload
         }
     ).then((response) => {
         if (response) {

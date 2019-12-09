@@ -19,5 +19,9 @@
     "graphql": "^14.5.8",
     "json-server": "^0.15.1",
     "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1"
   }
 }

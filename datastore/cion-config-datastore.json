@@ -9,6 +9,34 @@
       "principleId": "1574597326646",
       "totalItems": 0,
       "id": "85VfrUB"
+    },
+    {
+      "principleName": "Jedi",
+      "principleDescription": "Master jedi from star wars",
+      "principleThumbnail": "./datastore/configuration-thumbnail/1574701415428.jpeg",
+      "storageOption": "db",
+      "dbHostName": "127.0.0.1",
+      "dbPortNumber": "27017",
+      "dbUserName": "cion",
+      "dbPassword": "cion",
+      "dbName": "cion-prime-db",
+      "principleId": "1574701415428",
+      "totalItems": 0,
+      "id": "A8PVlF5"
+    },
+    {
+      "principleName": "Pokemon",
+      "principleDescription": "Mythical creatures with cool super powers",
+      "principleThumbnail": "./datastore/configuration-thumbnail/1575173966330.jpeg",
+      "storageOption": "db",
+      "dbHostName": "127.0.0.1",
+      "dbPortNumber": "27017",
+      "dbUserName": "cion",
+      "dbPassword": "cion",
+      "dbName": "cion-prime-db",
+      "principleId": "1575173966330",
+      "totalItems": 0,
+      "id": "YApuMAw"
     }
   ]
 }
